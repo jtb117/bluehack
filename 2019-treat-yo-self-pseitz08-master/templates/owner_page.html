@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="float:right"><a href = "{{url_for('hello') }}">Logout</a></div>
+
+<h1>Welcome {{ fn }} {{ ln }}!</h1>
+
+<a href = "{{ url_for('new_stylist') }}">Add new Stylists</a>
+
+<h2>Stylists</h2>
+{% if stylists %}
+    <ul>
+        {% for name in stylists %}
+            <li id={{name.un}}><a href = "{{ url_for('owner_to_stylist', un=name.un) }}">{{name.first_name + " " + name.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<h2>Patrons</h2>
+{% if patrons %}
+    <ul>
+        {% for name in patrons %}
+            <li id={{name.un}}><a href = "{{ url_for('owner_to_patron', un=name.un) }}">{{name.first_name + " " + name.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

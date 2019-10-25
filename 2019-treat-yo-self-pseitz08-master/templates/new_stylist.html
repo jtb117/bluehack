@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="float:right"><a href = "{{url_for('hello') }}">Logout</a></div>
+
+<h1>Add Stylist!</h1>
+
+<form action="{{ url_for('add_stylist') }}" method="post">
+    {{ "First Name: " }} <input type="text" name="firstname"/><br/><br/>
+    {{ "Last Name: " }} <input type="text" name="lastname"/><br/><br/>
+    {{ "Username: " }} <input type="text" name="username"/><br/><br/>
+    {{ "Password: " }} <input type="text" name="password"/><br/><br/>
+    <input type="submit" value="Add Stylist"/>
+</form>
+
+
+{% endblock %}

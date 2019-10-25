@@ -1,0 +1,16 @@
+
+<h2>Current Appointments:</h2>
+<p>Click on an appointment to cancel it</p>
+{% if appointments %}
+    <ul>
+        {% for apps in appointments %}
+            {% if apps.date.date() >= date.date() %}
+                <li><a href="{{ url_for('cancelled', id=apps.id) }}">{{ apps.date.date() }}</a></li>
+                    <ul>
+                        <li>{{"Time: "}}{{ apps.date.hour }}{{":00"}}</li>
+                        <li>{{"Stylist: " + apps.stylist.first_name + " " + apps.stylist.last_name }}</li>
+                    </ul>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}

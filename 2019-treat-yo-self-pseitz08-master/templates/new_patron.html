@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Craete Patron!</h1>
+
+<form action="{{ url_for('add_patron') }}" method="post">
+    {{ "First Name: " }} <input type="text" name="firstname"/><br/><br/>
+    {{ "Last Name: " }} <input type="text" name="lastname"/><br/><br/>
+    {{ "Username: " }} <input type="text" name="username"/><br/><br/>
+    {{ "Password: " }} <input type="text" name="password"/><br/><br/>
+    <input type="submit" value="Register"/>
+</form>
+
+
+{% endblock %}

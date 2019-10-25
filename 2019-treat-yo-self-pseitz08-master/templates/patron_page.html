@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="float:right"><a href = "{{url_for('hello') }}">Logout</a></div>
+
+<h1>Welcome {{ person.first_name + " " + person.last_name }}!</h1>
+
+<h2>Stylists:</h2>
+
+{% if stylists %}
+    <ul>
+        {% for name in stylists %}
+            <li id={{name.un}}><a href = "{{ url_for('patron_to_stylist', un=name.un) }}">{{name.first_name + " " + name.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<h2>Current Appointments:</h2>
+{% if appointments %}
+    <ul>
+        {% for apps in appointments %}
+            {% if apps.date.date() >= date.date() %}
+                <li>{{ apps.date.date() }}</li>
+                    <ul>
+                        <li>{{"Time: "}}{{ apps.date.hour }}{{":00"}}</li>
+                        <li>{{"Stylist: " + apps.stylist.first_name + " " + apps.stylist.last_name }}</li>
+                    </ul>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="{{url_for('make_appointment', patron=person.un)}}" method="post">
+    <input type="submit" value="Create Appointment"/> 
+</form>
+<form action="{{url_for('cancel_appointment', apps=appointments)}}" method="post">
+    <input type="submit" value="Cancel Appointment"/> 
+</form>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('create_appointment', patron=user.un) }}" method="post">
+    {{ "Date: " }} <input type="datetime-local" name="date"/><br/><br/>
+    {{ "Stylists: " }}
+    <select>
+        {% for people in stylists %}
+            <option name = 'drop' value={{people.id}}>{{people.first_name + " " + people.last_name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Make Appointment">
+</form>
+
+
+{% endblock %}

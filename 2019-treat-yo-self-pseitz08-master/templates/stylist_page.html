@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="float:right"><a href = "{{url_for('hello') }}">Logout</a></div>
+
+<h1>Welcome {{ person.first_name + " " + person.last_name}}!</h1>
+<h1>{{ date[0].month }}/{{ date[0].day }}/{{ date[0].year }}</h1>
+
+<table border=5>
+    <th></th>
+    {% for dates  in date %}
+        <th>{{ dates.month }}/{{ dates.day }}/{{ dates.year }}</th>
+    {% endfor %}
+    {% for i in range(0,11) %}
+        <tr>
+            <th>
+            {% if (10+i)<=12 %}
+                {{ (10+i) }}{{ ":00 AM" }}<br/>
+            {% else %}
+                {{ (i-2) }}{{ ":00 PM" }}<br/>
+            {% endif %}
+            </th>
+
+            {% for dates in date %}
+                {% if dates.weekday() == 0 or dates.weekday() == 6 %}
+                    <td><span style="color:green">Off Work</span></td>
+                {% else %}
+                    {% for apps in appointments %}
+                        {% if apps.date.hour == i+10 and apps.date.date() == dates.date() %}
+                            <td>{{ apps.patron.first_name + " " + apps.patron.last_name }}</td>
+                        {% else %}
+                            <td><span style="color:red">NO APPOINTMENT</span></td>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
